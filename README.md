@@ -5,7 +5,7 @@ What changed from your specification? Classes, method signatures, where validati
 What changed in the LinkedChain? Anything you added to or modified in the provided class and why your application needed it, or that you used it unchanged.
 What happened to your unknowns? Of the things you listed in your scope as not knowing how to do, which did you figure out, and which are still open?
 What doesn't work yet? MVP features, bad-input cases, or tests that are missing or failing in this prototype.
-## Next steps
+
 ## Next Steps
 
 ### 1. What Is Left to Finish the MVP (In Order)
