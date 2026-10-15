@@ -7,7 +7,7 @@ public class DutyRecommendation
     private boolean suggestNextHobby;
 
     /**
-     * Initializes the academic and hobby task chains.
+     * Creates an empty recommendation system.
      */
     public DutyRecommendation()
     {
@@ -17,7 +17,12 @@ public class DutyRecommendation
     }
 
     /**
-     * Adds an academic task to the chain.
+     * Adds an academic task to the end of the list.
+     *
+     * @param courseCode the class name (e.g. CS 2114)
+     * @param name the assignment name
+     * @param dueDate the due date
+     * @param hours estimated hours to complete
      */
     public void addAcademicTask(
         String courseCode,
@@ -26,11 +31,16 @@ public class DutyRecommendation
         double hours)
     {
         AcademicTask task = new AcademicTask(courseCode, name, dueDate, hours);
-        academicTasks.add(task);
+        academicTasks.addToEnd(task);
     }
 
     /**
-     * Adds a hobby task to the chain.
+     * Adds a hobby task to the end of the list.
+     *
+     * @param category hobby category (e.g. Fitness)
+     * @param description activity details
+     * @param hours planned hours
+     * @param goal target goal for the session
      */
     public void addHobbyTask(
         String category,
@@ -39,11 +49,15 @@ public class DutyRecommendation
         String goal)
     {
         HobbyTask task = new HobbyTask(category, description, hours, goal);
-        hobbyTasks.add(task);
+        hobbyTasks.addToEnd(task);
     }
 
     /**
-     * Safely removes an academic task without throwing constructor exceptions.
+     * Removes an academic task matching the course code and name.
+     *
+     * @param courseCode the course code
+     * @param name the assignment name
+     * @return true if removed, false otherwise
      */
     public boolean removeAcademicTask(String courseCode, String name)
     {
@@ -64,7 +78,11 @@ public class DutyRecommendation
     }
 
     /**
-     * Safely removes a hobby task without throwing constructor exceptions.
+     * Removes a hobby task matching the category and description.
+     *
+     * @param category the hobby category
+     * @param description the activity description
+     * @return true if removed, false otherwise
      */
     public boolean removeHobbyTask(String category, String description)
     {
@@ -86,7 +104,10 @@ public class DutyRecommendation
     }
 
     /**
-     * Marks an academic task complete by index.
+     * Marks an academic task as completed and suggests a hobby next.
+     *
+     * @param position 0-based index of the task
+     * @return result message
      */
     public String completeAcademicTask(int position)
     {
@@ -102,7 +123,10 @@ public class DutyRecommendation
     }
 
     /**
-     * Marks a hobby task complete by index.
+     * Marks a hobby task as completed and suggests an academic task next.
+     *
+     * @param position 0-based index of the task
+     * @return result message
      */
     public String completeHobbyTask(int position)
     {
@@ -118,7 +142,9 @@ public class DutyRecommendation
     }
 
     /**
-     * Generates the next recommended activity alternating between duty and downtime.
+     * Recommends the next uncompleted task, alternating between work and play.
+     *
+     * @return recommended task string
      */
     public String getNextRecommendation()
     {
@@ -166,6 +192,11 @@ public class DutyRecommendation
         }
     }
 
+    /**
+     * Counts how many academic tasks are not yet completed.
+     *
+     * @return number of uncompleted academic tasks
+     */
     public int countActiveAcademic()
     {
         int count = 0;
@@ -179,6 +210,11 @@ public class DutyRecommendation
         return count;
     }
 
+    /**
+     * Counts how many hobby tasks are not yet completed.
+     *
+     * @return number of uncompleted hobby tasks
+     */
     public int countActiveHobby()
     {
         int count = 0;
@@ -192,28 +228,53 @@ public class DutyRecommendation
         return count;
     }
 
+    /**
+     * Gets the total number of academic tasks.
+     *
+     * @return total academic tasks
+     */
     public int getAcademicCount()
     {
         return academicTasks.size();
     }
 
+    /**
+     * Gets the total number of hobby tasks.
+     *
+     * @return total hobby tasks
+     */
     public int getHobbyCount()
     {
         return hobbyTasks.size();
     }
 
+    /**
+     * Gets an academic task by index.
+     *
+     * @param index 0-based index
+     * @return the academic task
+     */
     public AcademicTask getAcademicTask(int index)
     {
         return academicTasks.get(index);
     }
 
+    /**
+     * Gets a hobby task by index.
+     *
+     * @param index 0-based index
+     * @return the hobby task
+     */
     public HobbyTask getHobbyTask(int index)
     {
         return hobbyTasks.get(index);
     }
 
     /**
-     * Stretch Goal: Keyword search across academic and hobby tasks.
+     * Searches both lists for tasks matching a keyword.
+     *
+     * @param query search word
+     * @return matching tasks or not-found message
      */
     public String searchTasks(String query)
     {
@@ -254,30 +315,42 @@ public class DutyRecommendation
         return sb.toString();
     }
 
+    /**
+     * Returns a numbered list of all tasks.
+     *
+     * @return readable list of tasks
+     */
+    @Override
     public String toString()
     {
-        StringBuilder academicString = new StringBuilder("Academic Tasks: [");
-        for (int i = 0; i < academicTasks.size(); i++)
+        StringBuilder sb = new StringBuilder();
+        sb.append("=== Academic Tasks ===\n");
+        if (academicTasks.isEmpty())
         {
-            academicString.append(academicTasks.get(i).toString());
-            if (i < academicTasks.size() - 1)
+            sb.append("  (None)\n");
+        }
+        else
+        {
+            for (int i = 0; i < academicTasks.size(); i++)
             {
-                academicString.append(", ");
+                sb.append("  ").append(i + 1).append(". ")
+                  .append(academicTasks.get(i).toString()).append("\n");
             }
         }
-        academicString.append("]");
 
-        StringBuilder hobbyString = new StringBuilder("Hobby Tasks: [");
-        for (int i = 0; i < hobbyTasks.size(); i++)
+        sb.append("\n=== Hobby Tasks ===\n");
+        if (hobbyTasks.isEmpty())
         {
-            hobbyString.append(hobbyTasks.get(i).toString());
-            if (i < hobbyTasks.size() - 1)
+            sb.append("  (None)\n");
+        }
+        else
+        {
+            for (int i = 0; i < hobbyTasks.size(); i++)
             {
-                hobbyString.append(", ");
+                sb.append("  ").append(i + 1).append(". ")
+                  .append(hobbyTasks.get(i).toString()).append("\n");
             }
         }
-        hobbyString.append("]");
-
-        return academicString.toString() + "\n" + hobbyString.toString();
+        return sb.toString();
     }
 }
