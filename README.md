@@ -27,8 +27,6 @@ Two things in your other documents don’t match this, so you may want to fix th
 
 ## Next Steps
 
-## Next Steps
-
 ### 1. Finishing the MVP (Remaining Features & Priority Order)
 Our prototype already has working task creation, scanner error handling, removal logic, and the Work-Then-Play recommendation system. To transition our current working prototype into a feature-complete Minimum Viable Product (MVP), we will complete the remaining work in this order:
 
