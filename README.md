@@ -97,5 +97,6 @@ Each team member is assigned primary ownership for remaining MVP deliverables, t
 | **testDutyRecommendation** | Irmuun | Wrote the test class and tested the class. GenAI assisted with making the test cases |
 
 
-##GenAI note
+## GenAI note
+
 Our team did most of the work on this project ourselves, and we used GenAI (Claude) as a helper to touch up, finalize, and further sophisticate it. We wrote our own classes, our specification, and our README drafts. GenAI then helped us tighten them. It reviewed our specification, and several of the changes in our revised scope came from that review: validation in layers, equals and hashCode on the task classes, suggestNextHobby starting as false, adding new items to the front of the chain, and finishing a specific duplicate by its list position. We used it to generate our test cases, including edge cases like removing a task that isn’t there, completing the same task twice, and asking for a recommendation when no tasks are left. After that, we reviewed each test to make sure it checks real behavior before keeping it. It also helped us polish the wording of this README, and we checked everything against our code before using it. LinkedChain was provided to us and we did not modify it.
