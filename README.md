@@ -17,11 +17,42 @@ Two things in your other documents don’t match this, so you may want to fix th
 
 ## Next Steps
 
-### 1. What Is Left to Finish the MVP (In Order)
-1. What Is Left to Finish the MVP (In Order)Our prototype already has working task creation, scanner error handling, removal logic, and the Work-Then-Play recommendation system. To bring the prototype to final submission quality, we will complete the remaining work in this order:   Replace Index-Based Loops with an Iterator (DutyRecommendation.java):
-Update searchTasks, toString, and countActive methods to traverse chains using an Iterator instead of calling get(i) inside for-loops, improving performance from O(n^2) to O(n).   Create the Missing LinkedChainTest.java Test Suite:
-Build a comprehensive JUnit 5 test class to test all generic pointer operations in LinkedChain directly.   Refine Output Formatting (Main.java):
-Polish spacing and banner headers when displaying completed tasks and search results to ensure clear terminal readability.   Comprehensive Checkstyle and Javadoc Audit:Audit all classes to ensure every method has complete Javadoc comments and passes all local Checkstyle rules without warnings.2. Stretch Goals (Scope Review)We reviewed every stretch goal listed in our original scope document:   Committed / In-Progress Stretch Goals:Search and Filtering (Already Implemented): We already built keyword searching across both academic and hobby task chains in DutyRecommendation.searchTasks() and hooked it up to Option 7 in Main.java.   Point System (Attempting if MVP finishes on schedule): We plan to add a simple gamified point tracker where completing an academic task awards points based on its estimated hours (such as 10 points per hour), and taking a break with a hobby spends earned points. This directly reinforces the Work-Then-Play balance.   Officially Dropped Stretch Goals:To prevent scope creep and ensure our data structure tests remain our top priority, we are officially dropping:CSV Import/Export   Priority System (low/med/high)   Custom Break Lengths   Weekly Summaries   Task Sorting   3. New Tests Needed (Methods and Bad Inputs)We will add new test cases covering pointer edge cases, the search feature, and point calculation logic:LinkedChainTest (Generic Storage Tests):testRemoveHeadNode(): Normal test removing the very first item in the chain.   testRemoveMiddleAndLastNode(): Normal test verifying pointer rewiring when deleting interior or tail nodes.   testRemoveFromEmptyChain(): Bad input; verifies removing from an empty chain returns false or null without throwing a NullPointerException.   testRemoveNonExistentItem(): Bad input; verifies searching for an item not in the chain returns false and leaves chain size unchanged.   testAddNullThrowsException(): Bad input; verifies add(null) and addToEnd(null) throw IllegalArgumentException.   testGetInvalidIndex(): Bad input; verifies negative indices and out-of-range indices throw IndexOutOfBoundsException.   testDutyRecommendation (Search, Duplicates and Points):testSearchKeywordFound(): Normal search test matching tasks by course code, assignment name, category, or description.   testSearchKeywordNotFound(): Bad input; verifies searching for a word not present returns a clean "No tasks found" message.   testSearchBlankQuery(): Bad input; verifies null or whitespace queries return a prompt error rather than crashing.   testEarnPointsOnAcademicCompletion(): Normal test verifying points increase proportionately when homework is completed.testSpendPointsOnHobbyCompletion(): Normal test verifying points decrease when a hobby is finished.testSpendPointsInsufficientBalance(): Bad input; verifies a user cannot complete a hobby requiring more points than their current earned balance.4. Who Does What (Team Ownership)LinkedChain Unit Tests: FrancisBuild LinkedChainTest.java covering head, middle, and tail removals, empty chains, and null insertions.Iterator Optimization and Search Tests: IrmuunUpdate DutyRecommendation.java to use iterators instead of index loops, and write testDutyRecommendation search tests.Point System and UI Polish: ChandrikaImplement the optional point ledger in DutyRecommendation and Main.java, write point tests, and perform final Checkstyle verifications.
+### 1. Finishing the MVP (Remaining Features & Priority Order)
+Our prototype already has working task creation, scanner error handling, removal logic, and the Work-Then-Play recommendation system[cite: 20]. To transition our current working prototype into a feature-complete Minimum Viable Product (MVP), we will complete the remaining work in this order:
+
+1. Replace Index-Based Loops with an Iterator (DutyRecommendation.java): Update searchTasks, toString, and countActive methods to traverse chains using an Iterator instead of calling get(i) inside for-loops, improving performance from O(n^2) to O(n)[cite: 16, 20].
+2. Create the Missing LinkedChainTest.java Test Suite: Build a comprehensive JUnit 5 test class to test all generic pointer operations in LinkedChain directly[cite: 19].
+3. Refine Output Formatting (Main.java): Polish spacing and banner headers when displaying completed tasks and search results to ensure clear terminal readability[cite: 20].
+4. Comprehensive Checkstyle & Javadoc Audit: Audit all classes to ensure every method has complete Javadoc comments and passes all local Checkstyle rules without warnings.
+
+---
+
+### 2. Stretch Goals (Scope Review)
+We reviewed every stretch goal listed in our original scope document[cite: 16]:
+
+* Committed / In-Progress Stretch Goals:
+  * Search and Filtering (Already Implemented): We already built keyword searching across both academic and hobby task chains in DutyRecommendation.searchTasks() and hooked it up to Option 7 in Main.java[cite: 20].
+  * Point System (Attempting if MVP finishes on schedule): We plan to add a simple gamified point tracker where completing an academic task awards points based on its estimated hours (e.g., 10 points per hour), and taking a break with a hobby spends earned points[cite: 16]. This directly reinforces the Work-Then-Play balance[cite: 16].
+
+* Officially Dropped Stretch Goals:
+  To prevent scope creep and ensure our data structure tests remain our top priority, we are officially dropping:
+  * CSV Import/Export[cite: 16]
+  * Priority System (low/med/high)[cite: 16]
+  * Custom Break Lengths[cite: 16]
+  * Weekly Summaries[cite: 16]
+  * Task Sorting[cite: 16]
+
+---
+
+### 3. Required New Tests (Methods & Bad-Input Cases)
+We will add new test cases covering pointer edge cases, the search feature, and point calculation logic:
+
+* LinkedChainTest (Generic Storage Tests):
+  * testRemoveHeadNode: Normal test removing the very first item in the chain[cite: 16].
+  * testRemoveMiddleAndLastNode: Normal test verifying pointer rewiring when deleting interior or tail nodes[cite: 16].
+  * testRemoveFromEmptyChain: Bad input; verifies removing from an empty chain returns false or null without throwing a NullPointerException[cite: 16].
+  * testRemoveNonExistentItem: Bad input; verifies searching for an item not in the chain returns false and leaves chain size unchanged[cite: 16].
+  * testAddNullThrowsException: Bad input; verifies add(null) and addToEnd(null) throw IllegalArgumentException[cite: 16].
 ## Attribution
  a table with one row per class and test file listing who worked on it and how (wrote, revised, reviewed, tested, GenAI-assisted, …), plus a note on the way in which you used GenAI, if at all.
 | Class | Who Worked on it | How |
