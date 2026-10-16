@@ -1,10 +1,19 @@
 # CS-2114-Project-2-Group-17-
 Duty and Downtime 
 ## Reflection
-What changed from your specification? Classes, method signatures, where validation lives, test cases — what did the spec say, what did you build instead, and why?
-What changed in the LinkedChain? Anything you added to or modified in the provided class and why your application needed it, or that you used it unchanged.
-What happened to your unknowns? Of the things you listed in your scope as not knowing how to do, which did you figure out, and which are still open?
-What doesn't work yet? MVP features, bad-input cases, or tests that are missing or failing in this prototype.
+What changed from our specification. For the most part we built what the spec described. LinkedChain stores things, AcademicTask and HobbyTask hold the data, DutyRecommendation owns both chains and the suggestNextHobby flag, and Main runs the menu. Most of the changes are small. The spec called the lookup method getEntry, but the LinkedChain we were given calls it get, so we used that. In Main we named the controller controller instead of recommendation, and we broke the menu code into helper methods like handleComplete and handleRemove, which the spec never listed. We also ended up building the search feature and menu option 7 even though search was left out of the MVP.
+
+Validation is mostly where we said it would be. Main re-prompts when the input is bad, the constructors throw IllegalArgumentException if something still gets through, and the remove methods return false instead of throwing. We added a few extra checks along the way. The constructors reject NaN and infinite hours, and the remove methods return false on null and ignore case and extra spaces. One thing is different from the spec: Main doesn’t catch IndexOutOfBoundsException. readPosition already keeps the number in range, so the exception would only happen if someone called the controller directly.
+
+The recommendation messages changed too. The spec said we’d show a “nothing left” message when the other category was empty. What we did instead is suggest an unfinished task from the same category (like “No Hobby Tasks left. Suggested Academic Task...”), and only say “No tasks left” when everything is done. The display is also a little different from the spec, because toString() prints [] for an empty list instead of “none” and doesn’t show the active counts. On tests, we have AcademicTaskTest, HobbyTaskTest and DutyRecommendationTest, but nothing for LinkedChain or Main yet.
+
+What changed in LinkedChain. We didn’t change it. Our spec listed an iterator() method, but the class we were given doesn’t have one, so we never actually modified it. We only use add, remove(T), get, size and isEmpty. The rest (addToEnd, count, toArray, contains, clear and remove()) go unused. Because we loop with get(i), a lot of our methods are slower than the O(n) we claimed in the spec. Adding an iterator is the first thing we plan to change in LinkedChain.
+
+What happened to our unknowns. We figured out most of them. The boolean flag works: finishing an academic task sets it to true, finishing a hobby sets it to false, and getNextRecommendation uses it to decide which list to pull from. Finished tasks don’t get suggested again, and completing the same task twice just tells you it’s already done. Duplicates are kept as separate nodes, and removing one only removes the first match. For the pointer rewiring worry, the provided LinkedChain already handles removing the head, middle and last nodes, so we didn’t have to write that ourselves, but we haven’t tested it directly since we don’t have a LinkedChainTest yet. We never tried CSV files because we dropped that stretch goal, so that one is still open.
+
+What doesn’t work yet. The biggest usability problem is that “Complete” and “Remove” ask for an item number, but the task list doesn’t show numbers, so a user can’t tell which number to type. Several methods (countActive, toString, searchTasks and getNextRecommendation) loop with get(i), which makes them O(n²). We still need tests for LinkedChain and Main, and the active counts aren’t shown anywhere in the menu. Due dates are just text with no check that they’re real dates, and the point system isn’t done.
+
+Two things in your other documents don’t match this, so you may want to fix them. The revised scope says the point system was dropped, but your Next Steps says you’ll try it if there’s time. The spec’s Data & State section also says suggestNextHobby starts as true, but the code and the constructor description both say false.
 
 ## Next Steps
 
