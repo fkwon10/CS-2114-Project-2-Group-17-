@@ -1,5 +1,15 @@
 # CS-2114-Project-2-Group-17-
 Duty and Downtime 
+
+## How to Download and Run in Eclipse
+1. Go to the main page of our GitHub repo
+2. Click the green **Code** button, then click **Download ZIP**.
+3. Open Eclipse and go to **File → Import → General → Existing Projects into Workspace**, then click **Next**.
+4. Click **Browse** next to "Select root directory" and choose the downloaded file that directly contains `.project` and `src`.
+5. Make sure the project is checked in the Projects list, then click **Finish**. If Eclipse says a project with that name already exists, delete or rename the old one first.
+6. To run the program, right-click `Main.java` in Package Explorer and choose **Run As → Java Application**. The menu appears in the Console tab, where you type a number from 1 to 8.
+7. To run the tests, right-click the `dutydowntime` package and choose **Run As → JUnit Test**. A green bar means all tests passed.
+
 ## Reflection
 What changed from our specification. For the most part we built what the spec described. LinkedChain stores things, AcademicTask and HobbyTask hold the data, DutyRecommendation owns both chains and the suggestNextHobby flag, and Main runs the menu. Most of the changes are small. The spec called the lookup method getEntry, but the LinkedChain we were given calls it get, so we used that. In Main we named the controller controller instead of recommendation, and we broke the menu code into helper methods like handleComplete and handleRemove, which the spec never listed. We also ended up building the search feature and menu option 7 even though search was left out of the MVP.
 
