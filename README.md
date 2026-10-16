@@ -23,8 +23,6 @@ What happened to our unknowns. We figured out most of them. The boolean flag wor
 
 What doesn’t work yet. The biggest usability problem is that “Complete” and “Remove” ask for an item number, but the task list doesn’t show numbers, so a user can’t tell which number to type. Several methods (countActive, toString, searchTasks and getNextRecommendation) loop with get(i), which makes them O(n²). We still need tests for LinkedChain and Main, and the active counts aren’t shown anywhere in the menu. Due dates are just text with no check that they’re real dates, and the point system isn’t done.
 
-Two things in your other documents don’t match this, so you may want to fix them. The revised scope says the point system was dropped, but your Next Steps says you’ll try it if there’s time. The spec’s Data & State section also says suggestNextHobby starts as true, but the code and the constructor description both say false.
-
 ## Next Steps
 
 ### 1. Finishing the MVP (Remaining Features & Priority Order)
